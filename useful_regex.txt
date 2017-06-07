@@ -1,0 +1,6 @@
+**********************
+get MAC address:
+ifconfig | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'`
+**********************
+list directories:
+ls -l | grep -E '^d.*'

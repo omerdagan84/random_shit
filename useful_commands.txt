@@ -1,0 +1,8 @@
+**************************
+word count - wc
+example: wc -l 
+count the number of newlines in output
+**************************
+send output to stdout and file - tee
+example: ps aux | tee ps.txt
+
