@@ -46,6 +46,7 @@ int main(int argc, char *argv[])
 
 	register_signals();
 
+	printf("program will continue to send comand 16 to secondary app\n");
 	while ( runFlag )
 	{
 		/* send the command to the remote application */
@@ -58,6 +59,8 @@ int main(int argc, char *argv[])
 		sleep(1);
 	}
 
+	printf("program recieved a CTRL-C signal from user\n");
+	printf("program will send command 255 to secondary - to cause it to exit/n");
 
 	value.sival_int = 255;
 	if(sigqueue(remote_pid, SIGUSR2, value) == 0) {
@@ -65,7 +68,10 @@ int main(int argc, char *argv[])
 	} else {
 		perror("SIGSENT-ERROR:");
 	}
+	printf("sent exit command to remote and wait for confirmation\n");
 
-	printf("sent exit command to remote and exiting\n");
+	while ( remoteFlag );
+
+	printf("confirmation recieved - exiting\n");
 	return 0;
 }

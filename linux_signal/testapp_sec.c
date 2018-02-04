@@ -12,7 +12,7 @@ void signal_handler( int signal, siginfo_t *si, void *arg )
 	int call_arg = si->si_value.sival_int;
 	remote_pid = (int)si->si_pid;
 
-	printf("recieved signal(%d) from pid(%d) with value(%d)",
+	printf("recieved signal(%d) from pid(%d) with value(%d)\n",
 			signal, remote_pid, call_arg);
 	if ( call_arg == 255 ) {
 		runFlag = false;
@@ -38,6 +38,7 @@ int main(int argc, char *argv[])
 
 	register_signal();
 
+	printf("command will continue to recive command 16 until command 255 is recieved\n");
 	while ( runFlag );
 
 	/*announce end of run to -> readDB*/
