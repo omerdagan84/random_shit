@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
 {
 	int sockfd = 0, n = 0;
 	char recvBuff[1024];
+	char sendBuff[1024];
 	struct sockaddr_in serv_addr; 
 
 	if(argc != 2)
@@ -45,19 +46,19 @@ int main(int argc, char *argv[])
 		return 1;
 	} 
 
-	while ( (n = read(sockfd, recvBuff, sizeof(recvBuff)-1)) > 0)
-	{
+	do {
+	    snprintf(sendBuff, sizeof(sendBuff), "client sending...\r\n");
+	    write(sockfd, sendBuff, strlen(sendBuff));
 		recvBuff[n] = 0;
 		if(fputs(recvBuff, stdout) == EOF)
 		{
 			printf("\n Error : Fputs error\n");
 		}
-	} 
+	} while ( (n = read(sockfd, recvBuff, sizeof(recvBuff)-1)) > 0);
+	 
 
-	if(n < 0)
-	{
-		printf("\n Read error \n");
-	} 
+	close(sockfd);
+	printf("\n Finished exchange \n");
 
 	return 0;
 }
