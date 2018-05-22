@@ -6,3 +6,39 @@ count the number of newlines in output
 send output to stdout and file - tee
 example: ps aux | tee ps.txt
 
+***********
+ to delete all lines containing "profile"
+:g/profile/d
+
+
+To delete all lines that do not contain a pattern
+:g!/^\s*"/d
+
+
+
+****************************
+scan network to find IP's and matching MACs:
+sudo arp-scan -l
+
+****************************
+SySTem Load monitoring
+
+//show CPU LOAD 
+$mpstat -P ALL 
+
+//show top 10 most CPU utilizing processes
+$ ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10
+
+//show load average since last reboot
+$ iostat
+
+//memory usage 
+$ vmstat
+
+$ free -m
+$ cat /proc/meminfo
+
+
+****************************
+Bash tricks:
+while true; do ifconfig eth0 down; sleep 10; ifconfig eth0 up; sleep 10; done
